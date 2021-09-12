@@ -1,0 +1,96 @@
+{%extends 'blog/base.html' %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <!-- as_p for formatting in paragraph -->
+
+    <style>
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+
+      main {
+        flex: 1 0 auto;
+      }
+
+      body {
+        background: #fff;
+      }
+
+      .input-field input[type=date]:focus + label,
+      .input-field input[type=text]:focus + label,
+      .input-field input[type=text]:focus + label,
+      .input-field input[type=password]:focus + label {
+        color: #e91e63;
+      }
+
+      .input-field input[type=date]:focus,
+      .input-field input[type=text]:focus,
+      .input-field input[type=text]:focus,
+      .input-field input[type=password]:focus {
+        border-bottom: 2px solid #e91e63;
+        box-shadow: none;
+      }
+    </style>
+
+  <body>
+    <div class="section"></div>
+    <main>
+      <center>
+        <!-- <img src="https://lh3.googleusercontent.com/ZdgjLAUksjqgSsw1Akd52ujZOXJeO-Skh6TY8M28ZZdDlf0ukn27_S-foVgKqVdLmkNKGrzx4Gia4Sc_uaPxrmPRdL6_hYdPu0Gh0bSCnMDxBqRvx_F_bVbJZcpfzs8rlmOvkBWL-SdidoOLn3-ugACK2nQ8_LBdM5MnN9t5pAd-GRo96fp5526N9MYZACpuK7mq_Lks6R6yQ-v5thQye-QzAtiQqAOPqMgUOfy-Yg_UwkqjnPqjw8Ic7oFuvt6okBPyuzLoMmwjhzd7ih5LtSRYBr2Rxk4xArbiESpMMLtfolRliLoBwKftNRvkyk_TcGoMTv4Qzry2nd7tIItTySb-piRJJjwUjm5l7AaY6bQUZ11kDgDkWdMfiqDnXxuCdh-nx1zfakRLjrWxqK9AoKxGWnn5naEUKH0OYsW2yQ9yn5CWLJIoMRCUMcCY2XKDnA6VwTKNCCBv5sDm5Gd1BVn4pT9J8Z3lwVufB7KMxGyY8kxcURTDokxlAWI0Y3SuqCW742L1cF8o6_tr0EFBAJCzK1tLolhLQNBF-pa5LlVslRDWc-dY_uU3uOygj_1gTkIN4XEJK6S2VctwWFZrmUOsJf9OIZg1c56NGl5d-T91vP26_JTZC7ybFc7McqdYNzvdqxfy8us0qkpgkr8p_xVlyxtXDSpylq5EBj074nG53YF3HjMhOnqeWL7eniog-QdjK7WZIs1D5ydqreXw-IYFqA=w636-h330-no?authuser=0" width="200" height="100" /> -->
+        <div class="section"></div>
+
+        <h5 class="purple-text">Please login into your account</h5>
+        <div class="section"></div>
+
+        <div class="container">
+          <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+            <form class="col s12" method="post">
+              <div class='row'>
+                <div class='col s12'>
+                </div>
+              </div>
+
+              <div class='row'>
+                <div class='input-field col s12'>
+                  <input id="first_name" type="text" class="validate" name="username" />
+                  <label for='first_name'>Enter your username</label>
+                </div>
+              </div>
+
+              <div class='row'>
+                <div class='input-field col s12'>
+                  <input class='validate' type='password' name='password' id='password' />
+                  <label for='password'>Enter your password</label>
+                </div>
+                <label style='float: right;'>
+                  <a class='pink-text' href='http://127.0.0.1:8000/password_reset/'><b>Forgot Password?</b></a>
+                </label>
+              </div>
+
+              <br />
+              <center>
+                <div class='row'>
+                  <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect dark-blue'>Login</button>
+                  <input type="hidden" name="next" value="{{next}}">
+                </div>
+              </center>
+            </form>
+          </div>
+        </div>
+      </center>
+
+      <div class="section"></div>
+      <div class="section"></div>
+    </main>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+
+    {% if form.errors %}
+      <p>Your username and password didn't match! Please try again!</p>
+    {% endif %}
+{%endblock%}

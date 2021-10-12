@@ -44,7 +44,7 @@
             <li><a href="{% url 'logout' %}">Logout</a></li>
             <li><a>Welcome: {{user.username}}</a></li>
           {% else %}
-            <li><a class='nav navbar-right' href="{% url 'login_user' %}">Login <span class='glyphicon glyphicon-user'></span></a></li>
+            <li><a class='nav navbar-right' href="http://127.0.0.1:8000/admin/login/?next=/admin/">Login<span class='glyphicon glyphicon-user'></span></a></li>
           {% endif %}
         </ul>
       </div>

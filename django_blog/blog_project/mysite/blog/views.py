@@ -4,7 +4,8 @@ from django.utils import timezone
 from blog.models import Post, Comment
 from blog.forms import PostForm, CommentForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -93,22 +94,23 @@ def comment_remove(request, pk):
     comment.delete()
     return redirect('post_detail', pk=post_pk)
 
-def create(request):
-    if request.method=='POST':
-        form=UserCreationForm(request.POST)
-        if form.is_valid():
-            user=form.save(UserCreationForm)
-            username=form.cleaned_data.get('username')
-            login(request,user)
 
-            member = member(user=user)
-            member.save()
-            return redirect('post_list', pk=post.pk)
-        else:
-            u = user=form.save(UserCreationForm)
-            u.delete()
-    form=UserCreationForm()
-    return render(request,'registration/create.html',context={'form':form})
+# def create(request):
+#     if request.method=='POST':
+#         form=UserCreationForm(request.POST)
+#         if form.is_valid():
+#             user=form.save(UserCreationForm)
+#             username=form.cleaned_data.get('username')
+#             login(request,user)
+
+#             member = member(user=user)
+#             member.save()
+#             return redirect('post_list', pk=Post.pk)
+#         else:
+#             u = user=form.save(UserCreationForm)
+#             u.delete()
+#     form=UserCreationForm()
+#     return render(request,'registration/create.html',context={'form':form})
 
 # def login_user(request):
 #     if request.method=='POST':
@@ -128,28 +130,29 @@ def create(request):
 #     form=AuthenticationForm()
 #     return render(request,'registration/login_user.html',context={'form':form})
 
-def login_user(request):
-    post = Post
-    if request.method == 'POST':
-        form = AuthenticationForm(request=request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                messages.info(request, f"You are now logged in as {username}")
-                return redirect('post_list', pk=post.pk)
-            else:
-                messages.error(request, "Invalid username or password.")
-        else:
-            messages.error(request, "Invalid username or password.")
-    form = AuthenticationForm()
-    return render(request = request,
-                    template_name = "registration/login_user.html",
-                    context={"form":form})
+# def login_user(request):
+#     post = Post
+#     if request.method == 'POST':
+#         form = AuthenticationForm(request=request, data=request.POST)
+#         if form.is_valid():
+#             username = form.cleaned_data.get('username')
+#             password = form.cleaned_data.get('password')
+#             user = authenticate(username=username, password=password)
+#             if user is not None:
+#                 login(request, user)
+#                 messages.info(request, f"You are now logged in as {username}")
+#                 return redirect('post_list', pk=post.pk)
+#             else:
+#                 messages.error(request, "Invalid username or password.")
+#         else:
+#             messages.error(request, "Invalid username or password.")
+#     form = AuthenticationForm()
+#     return render(request = request,
+#                     template_name = "registration/login_user.html",
+#                     context={"form":form})
 
-def logout_request(request):
-    logout(request)
-    messages.info(request, "Logged out successfully!")
-    return redirect('post_list',pk=post.pk)
+# def logout_request(request):
+#     post = Post
+#     logout(request)
+#     messages.info(request, "Logged out successfully!")
+#     return redirect('post_list',pk=post.pk)

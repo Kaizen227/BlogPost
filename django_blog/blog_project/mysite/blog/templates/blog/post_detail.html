@@ -35,12 +35,10 @@
        {% endif %}
 
        <p>{{comment.text|safe|linebreaks}}</p>
-       <p>Posted By:  <strong>{{ comment.author }}</strong></p>
+       <p>Posted By:<strong>{{ comment.author }}</strong></p>
      {% endif %}
      {% empty %}
      <p>No comments</p>
    {% endfor %}
  </div>
-
-
 {% endblock %}

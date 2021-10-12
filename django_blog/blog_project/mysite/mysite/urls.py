@@ -22,6 +22,7 @@ app_name = 'blog'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
-    path("logout", views.logout_request, name="logout"),
-    path("login", views.login_user, name="login"),
+    path('accounts/', include('django.contrib.auth.urls')),
+    # path('accounts/login/', views.login, name='login'),
+    # path('accounts/logout/', views.logout, name='logout', kwargs={'next_page':'/'}),
 ]

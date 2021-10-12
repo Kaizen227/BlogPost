@@ -2,11 +2,6 @@ from django.conf.urls import url
 from blog import views
 
 urlpatterns = [
-    url(r'^accounts/login_user/$',
-    views.login_user,
-    name='login_user'),
-    url(r'^accounts/logout_request/$',
-    views.logout_request, name='logout_request'),
     url(r'^$',
         views.PostListView.as_view(),
         name='post_list'),

@@ -1,5 +1,5 @@
 # BlogPost
-This is a blog website where you can write blogs. Features include:
+This is a blog website made with Python and Django web-framework with MySQL as the database. Features include:
 1. Login
 2. Making a new post featuring:
 -The name
